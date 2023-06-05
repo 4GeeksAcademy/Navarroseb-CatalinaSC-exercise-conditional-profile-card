@@ -29,7 +29,19 @@ function render(variables = {}) {
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
-  // reset the website body with the new html output
+  if (variables.name === null) variables.name = "Name, ";
+  if (variables.lastname === null) variables.lastname = "Lastname, ";
+  if (variables.role === null) variables.role = "Role, ";
+  if (variables.city === null) variables.city = "City, ";
+  if (variables.Country === null) variables.Country = "Country, ";
+
+
+  if (variables.twitter === null) variables.twitter = "4geeksacademy";
+  if (variables.github === null) variables.github = "4geeksacademy";
+  if (variables.instagram === null) variables.instagram = "4geeksacademy";
+  if (variables.linkedin === null) variables.linkedin = "school/4geeksacademyes/mycompany/";
+
+// reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
@@ -72,20 +84,35 @@ window.onload = function() {
   };
   render(window.variables); //render the card for the first time
 
-  document.querySelectorAll(".picker").forEach(function(elm) {
-    elm.addEventListener("change", function(e) {
-      // <- add a listener to every input
-      const attribute = e.target.getAttribute("for"); // when any input changes, collect the value
-      let values = {};
-      values[attribute] =
-        this.value == "" || this.value == "null"
-          ? null
-          : this.value == "true"
-          ? true
-          : this.value == "false"
-          ? false
-          : this.value;
-      render(Object.assign(window.variables, values)); // render again the card with new valus
-    });
-  });
+  document.querySelectorAll(".picker").forEach(function(elm)) {
+    elm.addEventListener("change", function(e)) {
+      // Le agrego eventlistener a todos, declaro funcion y pongo fontawesome icono
+      document.getElementById("twitter").addEventListener("click", click);
+  function click() {
+    const icono = document.getElementById("twitter");
+    icono.className = "fa-brands fa-square-twitter";
+  }
+  document.getElementById("github").addEventListener("click, click1");
+  function click1(){
+    const icono= document.getElementById("github");
+    icono.className = "fa-brands fa-square-github";
+  }
+  document.getElementById("linkedin").addEventListener("click, click2");
+  function click2(){
+    const icono= document.getElementById("linkedin");
+    icono.className =  "fa-brands fa-linkedin-in";
+  }
+  document.getElementById("instagram").addEventListener("click, click3");
+  function click3(){
+    const icono= document.getElementById("instagram");
+    icono.className = "fa-brands fa-square-instagram"; 
+  }
+   function cambiarColorFondo(e){
+    const color = e.target.value;
+    document.body.backgroundColor = color;
+
+   }
+   document.getElementById("colorPicker").addEventListener("change", cambiarColorFondo);
+  }
 };
+
